@@ -45,7 +45,7 @@ export default function ProductCard({
       <p className="">{desc.slice(0, 100)}...</p>
       {showAddBtn ? (
         <button
-          className="flex w-full justify-center items-center absolute bottom-0 left-0 bg-slate-300 p-3 hover:bg-slate-600 hover:text-slate-200"
+          className="flex w-full justify-center items-center absolute bottom-0 left-0 bg-slate-300 p-3 hover:bg-slate-600 hover:text-slate-200  gap-3"
           onClick={() => addToCart({ id, title, price, desc, img, rate })}
         >
           <AddIcon />
@@ -53,7 +53,7 @@ export default function ProductCard({
         </button>
       ) : (
         <button
-          className="flex w-full justify-center items-center absolute bottom-0 left-0 bg-slate-300 p-3 hover:bg-slate-600 hover:text-slate-200"
+          className="flex w-full justify-center items-center absolute bottom-0 left-0 bg-slate-300 p-3 hover:bg-slate-600 hover:text-slate-200 gap-3"
           onClick={() => removeFormCart(id)}
         >
           <div className="rotate-45">
