@@ -1,3 +1,4 @@
+import { useState } from "react";
 import usefetch from "../hooks/usefetch";
 import ProductCard from "./ProductCard";
 
@@ -5,9 +6,8 @@ import { hookOutput } from "../hooks/usefetch";
 import ItemSkeleton from "./ItemSkeleton";
 
 export default function Products() {
-  const { data, error, loading }: hookOutput = usefetch(
-    "https://fakestoreapi.com/products?limit=6"
-  );
+  const [url, setUrl] = useState("https://fakestoreapi.com/products?limit=6");
+  const { data, error, loading }: hookOutput = usefetch(url);
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -30,7 +30,10 @@ export default function Products() {
               .map((itm, idx) => <ItemSkeleton key={idx} />)}
       </div>
       {!loading && (
-        <button className="border border-slate-700 w-fit px-5 py-2 rounded-lg hover:bg-slate-700 hover:text-slate-100 my-5 ">
+        <button
+          className="border border-slate-700 w-fit px-5 py-2 rounded-lg hover:bg-slate-700 hover:text-slate-100 my-5 "
+          onClick={() => setUrl("https://fakestoreapi.com/products?limit=12")}
+        >
           Load more...
         </button>
       )}

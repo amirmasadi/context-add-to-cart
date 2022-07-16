@@ -25,16 +25,23 @@ export default function usefetch(url: string): hookOutput {
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  let localData = localStorage.getItem("products");
   async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(url);
-      const json = await res.json();
-      setData(json);
-    } catch (err) {
-      setError(err);
+    if (localData && JSON.parse(localData).url === url) {
+      setLoading(false);
+      setData(JSON.parse(localData).data);
+    } else {
+      setLoading(true);
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        setData(json);
+        localStorage.setItem("products", JSON.stringify({ url, data: json }));
+      } catch (err) {
+        setError(err);
+      }
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
